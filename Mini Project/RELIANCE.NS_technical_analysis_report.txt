@@ -1,0 +1,12 @@
+
+        Technical Analysis Report for Reliance Industries Limited (RELIANCE.NS):
+
+        1. Company Information:
+            - Company Name: Reliance Industries Limited
+            - Sector: Energy
+
+        2. Moving Averages Analysis:
+            The closing price is currently above both the 10-day and 50-day Exponential Moving Averages (EMA), indicating a potential uptrend.
+
+        This analysis provides valuable insights into the current market sentiment and potential trends in Reliance Industries Limited stock.
+        
