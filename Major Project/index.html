@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Market Analysis Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="dark-mode">
+    <header>
+        <h1>Financial Market Analysis</h1>
+    </header>
+    <main>
+        <div class="container">
+            <form action="/analyze" method="POST">
+                <div class="form-group">
+                    <label for="ticker">Ticker Symbol:</label>
+                    <input type="text" id="ticker" name="ticker" placeholder="Enter Ticker Symbol (e.g., AAPL)" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="timeframe">Select Timeframe:</label>
+                    <select id="timeframe" name="timeframe" required>
+                        <option value="1m">1 Minute</option>
+                        <option value="15m">15 Minutes</option>
+                        <option value="1h">1 Hour</option>
+                        <option value="1d">1 Day</option>
+                        <option value="1wk">1 Week</option>
+                        <option value="1mo">1 Month</option>
+                        <option value="6mo">6 Months</option>
+                        <option value="1y">1 Year</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="technical">Technical Analysis Techniques:</label>
+                    <select id="technical" name="technical" multiple size="5" required>
+                        {% for technique in technical_techniques %}
+                            <option value="{{ technique }}">{{ technique }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="fundamental">Fundamental Analysis Techniques:</label>
+                    <select id="fundamental" name="fundamental" multiple size="5" required>
+                        {% for technique in fundamental_techniques %}
+                            <option value="{{ technique }}">{{ technique }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="sentiment">Sentiment Analysis Techniques:</label>
+                    <select id="sentiment" name="sentiment" multiple size="5" required>
+                        {% for technique in sentiment_techniques %}
+                            <option value="{{ technique }}">{{ technique }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit">Analyze</button>
+            </form>
+        </div>
+    </main>
+    <div class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">🌙</div>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle("light-mode");
+            body.classList.toggle("dark-mode");
+
+            const themeToggle = document.getElementById("theme-toggle");
+            themeToggle.textContent = body.classList.contains("dark-mode") ? "🌙" : "☀️";
+        }
+    </script>
+</body>
+</html>

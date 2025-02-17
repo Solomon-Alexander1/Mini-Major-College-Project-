@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ ticker }} Analysis Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="dark-mode">
+    <header>
+        <h1>{{ ticker }} Analysis</h1>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Analysis Results for {{ ticker }}</h2>
+
+            <h3>Technical Analysis</h3>
+            <p>This analysis uses historical price data and indicators to predict price movements. It helps determine market trends, potential support and resistance levels, and signals for buying or selling.</p>
+            <ul id="technical-analysis">
+                {% for technique, result in technical_analysis.items() %}
+                    <li><strong>{{ technique }}:</strong> {{ result }}</li>
+                {% endfor %}
+            </ul>
+
+            <h3>Fundamental Analysis</h3>
+            <p>This analysis looks at a company's financial health and its market position. It includes earnings reports, P/E ratios, revenue growth, and other metrics that indicate whether a stock is overvalued or undervalued.</p>
+            <ul id="fundamental-analysis">
+                {% for technique, result in fundamental_analysis.items() %}
+                    <li><strong>{{ technique }}:</strong> {{ result }}</li>
+                {% endfor %}
+            </ul>
+
+            <h3>Sentiment Analysis</h3>
+            <p>Sentiment analysis assesses market sentiment based on news headlines and social media activity. It helps gauge the emotional tone of market participants and the potential direction of market movements.</p>
+            <ul id="sentiment-analysis">
+                {% for technique, result in sentiment_analysis.items() %}
+                    <li><strong>{{ technique }}:</strong> {{ result }}</li>
+                {% endfor %}
+            </ul>
+
+            <div id="chart-container">
+                <div class="tradingview-widget-container">
+                    <div id="tradingview_{{ ticker }}"></div>
+                </div>
+            </div>
+            
+            <h3>Overall Sentiment</h3>
+            <p>{{ overall_sentiment }}</p>
+
+            <a href="/" class="back-button">← Go Back</a>
+
+            <!-- Export Button -->
+            <button class="back-button" onclick="exportToCSV()">Export Analysis to CSV</button>
+
+        </div>
+    </main>
+
+    <div class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">🌙</div>
+    <script src="https://s3.tradingview.com/tv.js"></script>
+
+    <script>
+        new TradingView.widget({
+            "symbol": "{{ ticker }}",
+            "width": 1100,
+            "height": "600",
+            "container_id": "tradingview_{{ ticker }}",
+            "theme": "dark",
+            "details": true,
+            "hide_side_toolbar": false
+        });
+
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle("light-mode");
+            body.classList.toggle("dark-mode");
+
+            const themeToggle = document.getElementById("theme-toggle");
+            themeToggle.textContent = body.classList.contains("dark-mode") ? "🌙" : "☀️";
+        }
+
+        // Export Analysis to CSV
+        function exportToCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,";
+            let headers = ["Technique", "Result"];
+
+            // Add headers
+            csvContent += headers.join(",") + "\n";
+
+            // Collecting technical analysis data
+            const technicalRows = document.querySelectorAll("#technical-analysis li");
+            technicalRows.forEach(row => {
+                const technique = row.querySelector('strong').innerText;
+                const result = row.querySelector('strong').nextSibling.textContent.trim();
+                csvContent += `"${technique}","${result}"\n`;
+            });
+
+            // Collecting fundamental analysis data
+            const fundamentalRows = document.querySelectorAll("#fundamental-analysis li");
+            fundamentalRows.forEach(row => {
+                const technique = row.querySelector('strong').innerText;
+                const result = row.querySelector('strong').nextSibling.textContent.trim();
+                csvContent += `"${technique}","${result}"\n`;
+            });
+
+            // Collecting sentiment analysis data
+            const sentimentRows = document.querySelectorAll("#sentiment-analysis li");
+            sentimentRows.forEach(row => {
+                const technique = row.querySelector('strong').innerText;
+                const result = row.querySelector('strong').nextSibling.textContent.trim();
+                csvContent += `"${technique}","${result}"\n`;
+            });
+
+            // Download CSV
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "{{ ticker }}_analysis_results.csv");
+            document.body.appendChild(link);
+            link.click();
+        }
+    </script>
+</body>
+</html>

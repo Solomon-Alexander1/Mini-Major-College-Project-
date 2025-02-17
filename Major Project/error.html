@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Market Analysis - Error</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="dark-mode"> <!-- Dark mode by default -->
+    <header>
+        <div class="theme-toggle">
+            <label for="theme-switcher">Choose Theme:</label>
+            <select id="theme-switcher" onchange="toggleTheme()">
+                <option value="dark-mode">Dark Mode</option>
+                <option value="light-mode">Light Mode</option>
+            </select>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Error</h1>
+            <p>Sorry, there was an issue with your request. Please try again later or check the inputs.</p>
+
+            <div class="form-group">
+                <button onclick="window.history.back()">Go Back</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Financial Market Dashboard</p>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const theme = document.getElementById('theme-switcher').value;
+            document.body.className = theme;
+        }
+    </script>
+</body>
+</html>

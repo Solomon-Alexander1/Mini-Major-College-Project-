@@ -1,0 +1,143 @@
+/* Global styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212; /* Dark background */
+    color: #E0E0E0; /* Light text for dark mode */
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background-color: #1E1E1E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    height: 80px; /* Explicit height for header */
+}
+
+/* Floating Dark Mode Button */
+.theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #FF5733; /* Stock market red */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.theme-toggle:hover {
+    background-color: #FF2D00; /* Darker red */
+}
+
+/* Main Content */
+main {
+    margin-top: 100px; /* Space below the header */
+    padding: 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container {
+    background-color: #1E1E1E;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Form Styles */
+label {
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 10px;
+    display: block;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #4CAF50; /* Green border */
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: #4CAF50; /* Green */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green */
+}
+
+/* Light Mode Styles */
+.light-mode {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.light-mode header {
+    background-color: #f5f5f5;
+}
+
+.light-mode .theme-toggle {
+    background-color: #4CAF50; /* Green button for light mode */
+    color: #fff;
+}
+
+.light-mode .theme-toggle:hover {
+    background-color: #45a049; /* Darker green */
+}
+
+/* Go Back Button */
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.back-button:hover {
+    background-color: #45a049;
+}
+
+/* Chart Container */
+#chart-container {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.tradingview-widget-container {
+    display: inline-block;
+}
